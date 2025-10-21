@@ -13,7 +13,7 @@ SELECT nombre, precio AS 'precio_eur' ,'precio_usd'
 FROM producto;
 -- 5. Llista el nom dels productes, el preu en euros i el preu en dòlars estatunidencs (amb un tipus de canvi de 1 € = 1,1 $ i arrodonint el resultat a dues xifres decimals). Utilitza els següents àlies per a les columnes: nom del producte, euros, dòlars.
 SELECT nombre AS 'nombre del producto', precio AS 'euros',
-ROUND(precio * 1.1, 2) AS 'dolares' FROM producto;
+ROUND(precio * 1.1, 2) AS 'dolares' FROM producto;  
 
 -- 6. Llista els noms (nombre) i els preus de tots els productes de la taula producto, convertint els noms a majúscula.
 SELECT UPPER(nombre) AS nombre, precio
@@ -145,10 +145,16 @@ JOIN fabricante f ON p.codigo_fabricante = f.codigo
 WHERE f.nombre LIKE '%w%';
 
 -- 32. Retorna un llistat amb el nom del producte, el seu preu i el nom del fabricant (fabricante), per a tots els productes amb un preu igual o superior a 180 €. Ordena els resultats, primer pel preu en ordre descendent i després pel nom del producte en ordre ascendent.
-
+SELECT p.nombre, p.precio, f.nombre AS 'fabricante'
+FROM producto P
+JOIN fabricante f ON p.codigo_fabricante = f.codigo
+WHERE p.precio >= 180 
+ORDER BY precio DESC, p.nombre ASC;
 
 -- 33. Retorna un llistat amb el codi i el nom de fabricant (fabricante), solament d'aquells fabricants que tenen productes associats en la base de dades.
-
+SELECT DISTINCT f.codigo, f.nombre AS 'fabricante'
+FROM fabricante f
+JOIN producto p ON p.codigo_fabricante = f.codigo;
 
 -- 34. Retorna un llistat de tots els fabricants que existeixen en la base de dades, juntament amb els productes que té cadascun d'ells. Inclou també els fabricants que no tenen cap producte. Mostra el nom del fabricant (fabricante) i el nom del producte (producto).
 
